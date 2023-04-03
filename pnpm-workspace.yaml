@@ -1,0 +1,4 @@
+packages:
+  - "!**/test/**"
+  - packages/my_first_app
+  - packages/my_common_package

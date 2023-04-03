@@ -1,0 +1,26 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library")
+
+js_library(
+    name = "dirname",
+    srcs = [
+        "dirname.mjs",
+    ],
+    visibility = ["//packages:__subpackages__"],
+)
+
+js_library(
+    name = "node_modules_path",
+    srcs = [
+        "dirname.mjs",
+        "nodeModulesPath.mjs",
+    ],
+    visibility = ["//packages:__subpackages__"],
+)
+
+js_library(
+    name = "aliases",
+    srcs = [
+        "aliases.mjs",
+    ],
+    visibility = ["//packages:__subpackages__"],
+)

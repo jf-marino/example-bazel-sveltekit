@@ -1,0 +1,67 @@
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_run_binary")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+
+npm_link_all_packages(name = "node_modules")
+
+SVELTE_FILES = glob([".svelte-kit/" + d for d in [
+    "**/*.css",
+    "**/*.svg",
+    "**/*.js",
+    "**/*.ts",
+    "**/*.svelte",
+    "**/*.json",
+]])
+
+SRCS = [
+    "package.json",
+    "vite.config.ts",
+    "svelte.config.js",
+    "tsconfig.json",
+    ".eslintignore",
+    ".eslintrc.cjs",
+    ".npmrc",
+    ".prettierignore",
+    ".prettierrc",
+] + glob(["src/" + d for d in [
+    "**/*.css",
+    "**/*.sass",
+    "**/*.scss",
+    "**/*.svg",
+    "**/*.ts",
+    "**/*.svelte",
+    "**/*.html",
+]])
+
+BUILD_DEPS = ["//:node_modules/" + d for d in [
+    "@sveltejs/adapter-node",
+    "@sveltejs/kit",
+    "@sveltejs/package",
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser",
+    "svelte-preprocess",
+    "eslint",
+    "eslint-config-prettier",
+    "eslint-plugin-svelte3",
+    "prettier",
+    "prettier-plugin-svelte",
+    "svelte",
+    "svelte-check",
+    "tslib",
+    "typescript",
+    "vite",
+    "vitest",
+]]
+
+UTILS = [
+    "//packages/js_utils:aliases",
+]
+
+js_run_binary(
+    name = "my_common_package",
+    srcs = SVELTE_FILES + SRCS + BUILD_DEPS + UTILS,
+    args = [],
+    chdir = package_name(),
+    out_dirs = ["dist"],
+    tool = "//:svelte_package",
+    visibility = ["//packages:__subpackages__"],
+)

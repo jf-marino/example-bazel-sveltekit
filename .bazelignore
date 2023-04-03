@@ -1,0 +1,5 @@
+node_modules
+\*/templates
+
+packages/my_first_app/node_modules
+packages/my_common_package/node_modules

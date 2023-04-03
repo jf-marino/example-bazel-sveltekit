@@ -1,0 +1,13 @@
+# Bazel
+bazel-*
+
+# Node modules
+node_modules
+
+# Local files that we don't want to commit
+.env
+local/
+
+.vscode
+.fleet
+.DS_Store
